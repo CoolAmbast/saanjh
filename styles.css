@@ -44,7 +44,7 @@ h1 {
 h3 {
     font-size: 1.5em;
     margin-bottom: 20px;
-    background: linear-gradient(to right, rgb(2, 110, 234), rgb(255, 150, 245));
+    background: linear-gradient(to right, rgb(1, 110, 234), rgb(255, 150, 245));
     background-clip: text;
     color: transparent;
     text-transform: lowercase;
