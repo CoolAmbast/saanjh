@@ -22,9 +22,3 @@ HAIR ACCESSORIES
 •clips 
 •bows
 •scrunchy
-
-
-
- <footer>
-            ©2025 Saanjh - All rights reserved
-        </footer>

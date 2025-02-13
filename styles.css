@@ -1,46 +1,135 @@
-*{
-    margin: 0;
-    padding: 0;
-    font-weight: bold;
-    color: white;
-}
-html{
-    height: 100%;
-}
-body{
-    height: 100%;
-    background: url(bg.png);
-    background-repeat: no-repeat;
+body {
+    background: url(bg.png); /* Replace with your background image */
     background-size: cover;
-    background-attachment: fixed;
     background-position: center;
+    background-attachment: fixed;
+    margin: 0;
+    font-family: sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.glass-container{
-    height: 80%;
-    width: 80%;
-    padding: 30px 50px;
-    border-radius: 50px;
-    background-color: rgba(255, 255, 255, 0.027);
-    display: flex;
+    min-height: 100vh;
+    color: black; /* Default text color */
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    backdrop-filter: blur(10px);
-    border-top: 1px solid white;
-    border-left: 1px solid white;
-    box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.089);
-    font-family: sans-serif;
-    text-align: justify;
-    line-height: 185%;
-    font-size: 50px;
 }
-h1{
-    margin: 30px;
+
+.container {
+    display: flex;
+    flex-direction: column; /* Stack glass container and content */
+    align-items: center; /* Center horizontally */
+    width: 80%; /* Adjust as needed */
+    max-width: 1200px; /* Limit width on larger screens */
+    margin: 20px auto; /* Center the container */
+    flex: 1;
+}
+
+.glass-container {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-bottom: 30px; /* Space between glass container and content */
+}
+
+h1 {
+    font-size: 60px;
+    margin-bottom: 10px;
     background: linear-gradient(to right, rgb(111, 255, 255), rgb(255, 150, 245));
     background-clip: text;
     color: transparent;
-    font-size: 80px;
+}
+
+h3 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, rgb(111, 255, 255), rgb(255, 150, 245));
+    background-clip: text;
+    color: transparent;
+    text-transform: lowercase;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.content-box {
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-sizing: border-box; /* Include padding in width */
+    width: calc(33.33% - 20px); /* 3 boxes per row with gap */
+    text-align: center;
+    transition: transform 0.2s; /* Smooth hover effect */
+    display: flex; /* Use flexbox for vertical centering */
+    flex-direction: column; /* Stack content vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    min-height: 200px; /* Set a minimum height for consistent layout */
+}
+.content-box a { /* Target the <a> tag inside .content-box */
+    color: inherit; /* Inherit the color from the parent */
+    text-decoration: none; /* Remove underlines if you don't want them */
+}
+
+.content-box a:visited { /* Style for visited links */
+    color: inherit; /* Keep the same color */
+}
+.content-box h2 {
+    margin-bottom: 10px;
+}
+footer {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    /* margin-top: auto;  Remove this - not needed with flexbox */
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) { /* Adjust breakpoint as needed */
+    .content-box {
+        width: calc(50% - 20px); /* 2 boxes per row */
+    }
+}
+
+@media (max-width: 768px) {
+    .content-box {
+        width: calc(50% - 20px); /* 2 boxes per row */
+        min-height: 150px; /* Adjust min-height as needed */
+    }
+
+    .glass-container {
+        padding: 30px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h3 {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-box {
+        width: 100%; /* 1 box per row */
+        min-height: 120px; /* Adjust min-height as needed */
+    }
 }
