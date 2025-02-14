@@ -1,10 +1,10 @@
 @font-face {
     font-family: CS;
-    src: url(/fonts/SHUTTLE-X.ttf);
+    src: url(SHUTTLE-X.ttf);
   }
 
 body {
-    background: url(/assests/bg.png);
+    background: url(bg.png);
     background-size: cover;
     background-position: center;
     margin: 0;
