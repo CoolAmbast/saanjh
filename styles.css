@@ -1,24 +1,29 @@
+@font-face {
+    font-family: CS;
+    src: url(SHUTTLE-X.ttf);
+  }
+
 body {
-    background: url(bg.png); /* Replace with your background image */
+    background: url(bg.png);
     background-size: cover;
     background-position: center;
     margin: 0;
-    font-family: sans-serif;
+    font-family: CS;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    color: black; /* Default text color */
+    color: black;
     flex-direction: column;
 }
 
 .container {
     display: flex;
-    flex-direction: column; /* Stack glass container and content */
-    align-items: center; /* Center horizontally */
-    width: 80%; /* Adjust as needed */
-    max-width: 1200px; /* Limit width on larger screens */
-    margin: 20px auto; /* Center the container */
+    flex-direction: column;
+    align-items: center; 
+    width: 80%; 
+    max-width: 1200px; 
+    margin: 20px auto;
     flex: 1;
 }
 
@@ -30,13 +35,15 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     text-align: center;
-    margin-bottom: 30px; /* Space between glass container and content */
+    margin-bottom: 30px;
+    border-top: 1px solid white;
+    border-left: 1px solid white;
 }
 
 h1 {
     font-size: 60px;
     margin-bottom: 10px;
-    background: linear-gradient(to left, rgb(2, 110, 234), rgb(255, 150, 245));
+    background: linear-gradient(to right, #FA8BFF, #2BD2FF,#2BFF88);
     background-clip: text;
     color: transparent;
 }
@@ -44,12 +51,16 @@ h1 {
 h3 {
     font-size: 1.5em;
     margin-bottom: 20px;
-    background: linear-gradient(to right, rgb(2, 110, 234), rgb(255, 150, 245));
+    background: linear-gradient(to right, #FA8BFF, #2BD2FF,#2BFF88);
     background-clip: text;
     color: transparent;
     text-transform: lowercase;
 }
-
+h2{
+    background: linear-gradient(to right, #FA8BFF, #2BD2FF,#2BFF88);
+    background-clip: text;
+    color: transparent;
+}
 .content-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -61,27 +72,29 @@ h3 {
 .content-box {
     background-color: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(5px);
-    border-radius: 10px;
+    border-radius: 2000px;
     padding: 20px;
     border: 1px solid rgba(255, 255, 255, 0.5);
-    box-sizing: border-box; /* Include padding in width */
-    width: calc(33.33% - 20px); /* 3 boxes per row with gap */
+    box-sizing: border-box;
+    width: calc(33.33% - 20px);
     text-align: center;
-    transition: transform 0.2s; /* Smooth hover effect */
-    display: flex; /* Use flexbox for vertical centering */
-    flex-direction: column; /* Stack content vertically */
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
-    min-height: 200px; /* Set a minimum height for consistent layout */
+    transition: transform 0.2s;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 200px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border-top: 1px solid white;
+    border-left: 1px solid white;
 }
-.content-box a { /* Target the <a> tag inside .content-box */
-    color: inherit; /* Inherit the color from the parent */
-    text-decoration: none; /* Remove underlines if you don't want them */
+.content-box a {
+    color: inherit; 
+    text-decoration: none; 
 }
 
-.content-box a:visited { /* Style for visited links */
-    color: inherit; /* Keep the same color */
+.content-box a:visited { 
+    color: inherit; 
 }
 .content-box h2 {
     margin-bottom: 10px;
@@ -93,7 +106,6 @@ footer {
     padding: 20px;
     width: 100%;
     box-sizing: border-box;
-    /* margin-top: auto;  Remove this - not needed with flexbox */
 }
 
 footer p {
@@ -102,16 +114,16 @@ footer p {
 }
 
 /* Responsive Styles */
-@media (max-width: 992px) { /* Adjust breakpoint as needed */
+@media (max-width: 992px) {
     .content-box {
-        width: calc(50% - 20px); /* 2 boxes per row */
+        width: calc(50% - 20px);
     }
 }
 
 @media (max-width: 768px) {
     .content-box {
-        width: calc(50% - 20px); /* 2 boxes per row */
-        min-height: 150px; /* Adjust min-height as needed */
+        width: calc(50% - 20px);
+        min-height: 150px;
     }
 
     .glass-container {
@@ -129,7 +141,7 @@ footer p {
 
 @media (max-width: 480px) {
     .content-box {
-        width: 100%; /* 1 box per row */
-        min-height: 120px; /* Adjust min-height as needed */
+        width: 100%;
+        min-height: 120px;
     }
 }
