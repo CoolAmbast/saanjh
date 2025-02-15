@@ -2,6 +2,12 @@
     font-family: CS;
     src: url(SHUTTLE-X.ttf);
 }
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     background: url(bg.png);
@@ -15,6 +21,7 @@ body {
     min-height: 100vh;
     color: black;
     flex-direction: column;
+    margin: 0;
 }
 
 .heading {
@@ -116,6 +123,59 @@ h1 {
 
 .buy-button:hover {
     opacity: 0.9;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 0;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #D03463, #FF6A88);
+    border-radius: 10px;
+    border: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #b82e56, #ff5677);
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #D03463 rgba(255, 255, 255, 0.4);
+}
+
+footer {
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(to right, rgba(208, 52, 99, 0.9), rgba(255, 106, 136, 0.9));
+    color: white;
+    text-align: center;
+    margin-top: auto;
+    box-sizing: border-box;
+    backdrop-filter: blur(5px);
+}
+
+footer p {
+    margin: 0;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+    footer {
+        padding: 15px;
+    }
+    
+    footer p {
+        font-size: 0.9rem;
+    }
 }
 
 @media (max-width: 768px) {
