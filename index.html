@@ -6,6 +6,7 @@
     <title>Saanjh</title>
     <link rel="icon" href="icon.png">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -34,5 +35,71 @@
     <footer>
         <p>©2025 Saanjh - All rights reserved</p>
     </footer>
+    <div id="cart-icon-container">
+        <div id="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-item-count">0</span>
+        </div>
+    </div>
+    
+    <!-- Cart container that slides in from the right -->
+    <div id="cart-container">
+        <button id="close-cart"><i class="fas fa-times"></i></button>
+        <div id="cart-header">
+            <h2>Shopping Cart</h2>
+        </div>
+        <div id="cart-items"></div>
+        <div id="cart-total">Total: ₹0</div>
+        <button id="checkout-button">Checkout</button>
+    </div>
+</div>
+<div id="checkout-form-container">
+    <div id="checkout-form-content">
+        <button id="close-checkout-form"><i class="fas fa-times"></i></button>
+        <h2>Complete Your Order</h2>
+        <form id="checkout-form">
+            <div class="form-group">
+                <label for="customer-name">Full Name*</label>
+                <input type="text" id="customer-name" required>
+            </div>
+            <div class="form-group">
+                <label for="customer-address">Delivery Address*</label>
+                <textarea id="customer-address" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="customer-phone">Phone Number*</label>
+                <input type="tel" id="customer-phone" required pattern="[0-9]{10}">
+                <small>Enter a 10-digit phone number</small>
+            </div>
+            <div class="form-group">
+                <label for="customer-alt-phone">Alternative Phone Number</label>
+                <input type="tel" id="customer-alt-phone" pattern="[0-9]{10}">
+                <small>Optional</small>
+            </div>
+            <div class="form-group">
+                <label>Payment Method*</label>
+                <div class="payment-options">
+                    <div class="payment-option">
+                        <input type="radio" id="payment-cod" name="payment-method" value="Cash on Delivery" required>
+                        <label for="payment-cod">Cash on Delivery</label>
+                    </div>
+                </div>
+            </div>
+            <div id="checkout-total">Total: ₹0</div>
+            <button type="submit" id="confirm-order-button">Confirm Order</button>
+        </form>
+    </div>
+</div>
+
+<!-- Thank you message popup -->
+<div id="thank-you-message">
+    <div class="thank-you-content">
+        <i class="fas fa-check-circle"></i>
+        <h2>Thank You for Your Order!</h2>
+        <p>We will contact you shortly to confirm your order details.</p>
+        <button id="close-thank-you">Continue Shopping</button>
+    </div>
+</div>
+    <script src="script.js"></script>
 </body>
 </html>

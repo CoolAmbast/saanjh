@@ -6,6 +6,7 @@
     <title>Earrings-Saanjh</title>
     <link rel="icon" href="icon.png">
     <link rel="stylesheet" href="er.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <div class="heading">
@@ -17,65 +18,130 @@
             <img src="earring.jpg" alt="Crystal Drops" class="product-image">
             <h3 class="product-name">Crystal Drops</h3>
             <p class="product-price">₹599</p>
-            <button class="buy-button">Buy Now</button>
+            <button class="buy-button" onclick="addToCart({ name: 'test', price: 599, quantity:1 })">Add to cart</button>
         </div>
         <div class="product-card">
             <img src="earring.jpg" alt="Golden Hoops" class="product-image">
             <h3 class="product-name">Golden Hoops</h3>
             <p class="product-price">₹799</p>
-            <button class="buy-button">Buy Now</button>
+            <button class="buy-button" onclick="addToCart({ name: 'test', price: 799, quantity:1 })">Add to cart</button>
         </div>
         <div class="product-card">
             <img src="earring.jpg" alt="Pearl Studs" class="product-image">
             <h3 class="product-name">Pearl Studs</h3>
             <p class="product-price">₹499</p>
-            <button class="buy-button">Buy Now</button>
+            <button class="buy-button" onclick="addToCart({ name: 'test', price: 499, quantity:1 })">Add to cart</button>
         </div>
         <div class="product-card">
             <img src="earring.jpg" alt="Ethnic Jhumkas" class="product-image">
             <h3 class="product-name">Ethnic Jhumkas</h3>
             <p class="product-price">₹899</p>
-            <button class="buy-button">Buy Now</button>
+            <button class="buy-button" onclick="addToCart({ name: 'test', price: 899, quantity:1 })">Add to cart</button>
         </div>
         <div class="product-card">
             <img src="earring.jpg" alt="Silver Danglers" class="product-image">
             <h3 class="product-name">Silver Danglers</h3>
             <p class="product-price">₹699</p>
-            <button class="buy-button">Buy Now</button>
+            <button class="buy-button" onclick="addToCart({ name: 'test', price: 699, quantity:1 })">Add to cart</button>
         </div>
         <div class="product-card">
             <img src="earring.jpg" alt="Kundan Earrings" class="product-image">
             <h3 class="product-name">Kundan Earrings</h3>
             <p class="product-price">₹999</p>
-            <button class="buy-button">Buy Now</button>
+            <button class="buy-button" onclick="addToCart({ name: 'test', price: 999, quantity:1 })">Add to cart</button>
         </div>
         <div class="product-card">
             <img src="earring.jpg" alt="Boho Chandbalis" class="product-image">
             <h3 class="product-name">Boho Chandbalis</h3>
             <p class="product-price">₹849</p>
-            <button class="buy-button">Buy Now</button>
+            <button class="buy-button" onclick="addToCart({ name: 'test', price: 849, quantity:1 })">Add to cart</button>
         </div>
         <div class="product-card">
             <img src="earring.jpg" alt="Simple Studs" class="product-image">
             <h3 class="product-name">Simple Studs</h3>
             <p class="product-price">₹399</p>
-            <button class="buy-button">Buy Now</button>
+            <button class="buy-button" onclick="addToCart({ name: 'test', price: 399, quantity:1 })">Add to cart</button>
         </div>
         <div class="product-card">
             <img src="earring.jpg" alt="Designer Drops" class="product-image">
             <h3 class="product-name">Designer Drops</h3>
             <p class="product-price">₹749</p>
-            <button class="buy-button">Buy Now</button>
+            <button class="buy-button" onclick="addToCart({ name: 'test', price: 749, quantity:1 })">Add to cart</button>
         </div>
         <div class="product-card">
             <img src="earring.jpg" alt="Traditional Jhumkas" class="product-image">
             <h3 class="product-name">Traditional Jhumkas</h3>
             <p class="product-price">₹949</p>
-            <button class="buy-button">Buy Now</button>
+            <button class="buy-button" onclick="addToCart({ name: 'test', price: 949, quantity:1 })">Add to cart</button>
         </div>
     </div>
     <footer>
         <p>©2025 Saanjh - All rights reserved</p>
     </footer>
+    <div id="cart-icon-container">
+        <div id="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-item-count">0</span>
+        </div>
+    </div>
+    
+    <!-- Cart container that slides in from the right -->
+    <div id="cart-container">
+        <button id="close-cart"><i class="fas fa-times"></i></button>
+        <div id="cart-header">
+            <h2>Shopping Cart</h2>
+        </div>
+        <div id="cart-items"></div>
+        <div id="cart-total">Total: ₹0</div>
+        <button id="checkout-button">Checkout</button>
+    </div>
+    <div id="checkout-form-container">
+        <div id="checkout-form-content">
+            <button id="close-checkout-form"><i class="fas fa-times"></i></button>
+            <h2>Complete Your Order</h2>
+            <form id="checkout-form">
+                <div class="form-group">
+                    <label for="customer-name">Full Name*</label>
+                    <input type="text" id="customer-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="customer-address">Delivery Address*</label>
+                    <textarea id="customer-address" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="customer-phone">Phone Number*</label>
+                    <input type="tel" id="customer-phone" required pattern="[0-9]{10}">
+                    <small>Enter a 10-digit phone number</small>
+                </div>
+                <div class="form-group">
+                    <label for="customer-alt-phone">Alternative Phone Number</label>
+                    <input type="tel" id="customer-alt-phone" pattern="[0-9]{10}">
+                    <small>Optional</small>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method*</label>
+                    <div class="payment-options">
+                        <div class="payment-option">
+                            <input type="radio" id="payment-cod" name="payment-method" value="Cash on Delivery" required>
+                            <label for="payment-cod">Cash on Delivery</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="checkout-total">Total: ₹0</div>
+                <button type="submit" id="confirm-order-button">Confirm Order</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Thank you message popup -->
+    <div id="thank-you-message">
+        <div class="thank-you-content">
+            <i class="fas fa-check-circle"></i>
+            <h2>Thank You for Your Order!</h2>
+            <p>We will contact you shortly to confirm your order details.</p>
+            <button id="close-thank-you">Continue Shopping</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
