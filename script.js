@@ -107,39 +107,40 @@ function calculateCartTotal() {
     return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
 }
 
+/**
+ * Submits order data to Google Apps Script web app
+ * @param {Object} orderData - The complete order data object
+ */
 function saveOrderToFile(orderData) {
-    // Google Form URL - Replace with your actual form URL
-    const formUrl = 'https://docs.google.com/forms/d/1KNVGWjNvCBhXcwNTgq3TimtxqE36uv2SqH82nv_zSmA/formResponse';
-    
-    // Format items as a detailed string with each item on a new line
-    const itemsList = orderData.items.map(item => 
-        `${item.name} - ₹${item.price} x ${item.quantity} = ₹${item.price * item.quantity}`
-    ).join('\n');
-    
-    // Create form data object
-    const formData = new FormData();
-    
-    // Add form fields to FormData object
-    formData.append('entry.1372573522', orderData.customer.name);            // Customer name
-    formData.append('entry.1154167033', orderData.customer.address);         // Customer address
-    formData.append('entry.333861901', orderData.customer.phone);           // Customer phone
-    formData.append('entry.36473302', orderData.customer.altPhone || 'N/A'); // Customer alt phone
-    formData.append('entry.1585450313', orderData.paymentMethod);            // Payment method
-    formData.append('entry.2147463217', itemsList);                          // Items list
-    formData.append('entry.882243264', `₹${orderData.total}`);              // Total amount
-    formData.append('entry.1703675855', new Date(orderData.orderDate).toLocaleString()); // Order date
+    // Replace with your deployed Google Apps Script Web App URL
+    // You'll get this URL after publishing your script as a web app
+    const webAppUrl = 'https://script.google.com/macros/s/AKfycbzaQEEvEKgQGFzKbSmRQKOIhV8b0aGtA6vMFY_-lxvKGvTejxcW_uNcaMuHbb7U_5nz/exec';
     
     // Log data being submitted (for debugging)
-    console.log('Order being submitted to Google Form:', orderData);
+    console.log('Order being submitted:', orderData);
     
-    // Use fetch API to submit the form
-    fetch(formUrl, {
+    // Show loading indicator
+    const checkoutButton = document.querySelector('#checkout-form button[type="submit"]');
+    const originalButtonText = checkoutButton.textContent;
+    checkoutButton.textContent = 'Processing...';
+    checkoutButton.disabled = true;
+    
+    // Use fetch API to submit the data to your web app
+    fetch(webAppUrl, {
         method: 'POST',
-        mode: 'no-cors', // This is important for cross-domain requests to Google
-        body: formData
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData)
     })
     .then(response => {
-        console.log('Form submitted successfully');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Order submitted successfully:', data);
         
         // Clear the cart
         cart = [];
@@ -152,9 +153,13 @@ function saveOrderToFile(orderData) {
         showThankYouMessage();
     })
     .catch(error => {
-        console.error('Error submitting form:', error);
-        // You might want to show an error message to the user here
+        console.error('Error submitting order:', error);
         alert('There was an error submitting your order. Please try again or contact us directly.');
+    })
+    .finally(() => {
+        // Reset button state
+        checkoutButton.textContent = originalButtonText;
+        checkoutButton.disabled = false;
     });
 }
 
