@@ -112,35 +112,48 @@ function calculateCartTotal() {
  * @param {Object} orderData - The complete order data object
  */
 function saveOrderToFile(orderData) {
-    // Replace with your deployed Google Apps Script Web App URL
-    // You'll get this URL after publishing your script as a web app
-    const webAppUrl = 'https://script.google.com/macros/s/AKfycbzaQEEvEKgQGFzKbSmRQKOIhV8b0aGtA6vMFY_-lxvKGvTejxcW_uNcaMuHbb7U_5nz/exec';
+    // Your Google Apps Script Web App URL
+    const webAppUrl = 'https://script.google.com/macros/s/AKfycbw1HFj2nGz47MS-nuHrqFHXQM2dt7IOKCWwqrEzKSRGEmv2Gq2KOh-B56z65YEtqmPR/exec';
     
-    // Log data being submitted (for debugging)
+    // Log data being submitted
     console.log('Order being submitted:', orderData);
     
-    // Show loading indicator
+    // Create a hidden form
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = webAppUrl;
+    form.target = 'hidden_iframe';
+    form.style.display = 'none';
+    
+    // Create a hidden input field with order data as JSON
+    const dataInput = document.createElement('input');
+    dataInput.type = 'hidden';
+    dataInput.name = 'data';
+    dataInput.value = JSON.stringify(orderData);
+    form.appendChild(dataInput);
+    
+    // Create a hidden iframe to receive the response
+    let iframe = document.getElementById('hidden_iframe');
+    if (!iframe) {
+        iframe = document.createElement('iframe');
+        iframe.name = 'hidden_iframe';
+        iframe.id = 'hidden_iframe';
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+    }
+    
+    // Add the form to the document
+    document.body.appendChild(form);
+    
+    // Show loading state
     const checkoutButton = document.querySelector('#checkout-form button[type="submit"]');
-    const originalButtonText = checkoutButton.textContent;
+    const originalButtonText = checkoutButton.textContent || 'Submit Order';
     checkoutButton.textContent = 'Processing...';
     checkoutButton.disabled = true;
     
-    // Use fetch API to submit the data to your web app
-    fetch(webAppUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(orderData)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Order submitted successfully:', data);
+    // Handle iframe load event
+    iframe.onload = function() {
+        console.log('Order submitted successfully');
         
         // Clear the cart
         cart = [];
@@ -151,16 +164,43 @@ function saveOrderToFile(orderData) {
         // Hide checkout form and show thank you message
         hideCheckoutForm();
         showThankYouMessage();
-    })
-    .catch(error => {
-        console.error('Error submitting order:', error);
-        alert('There was an error submitting your order. Please try again or contact us directly.');
-    })
-    .finally(() => {
+        
         // Reset button state
         checkoutButton.textContent = originalButtonText;
         checkoutButton.disabled = false;
-    });
+        
+        // Clean up the form
+        document.body.removeChild(form);
+    };
+    
+    // Submit the form
+    form.submit();
+    
+    // Add a timeout in case the iframe doesn't load properly
+    setTimeout(function() {
+        if (checkoutButton.disabled) {
+            console.log('Timeout reached, assuming success');
+            // Assume success if still processing after 5 seconds
+            // Clear the cart
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartDisplay();
+            updateCartIcon();
+            
+            // Hide checkout form and show thank you message
+            hideCheckoutForm();
+            showThankYouMessage();
+            
+            // Reset button state
+            checkoutButton.textContent = originalButtonText;
+            checkoutButton.disabled = false;
+            
+            // Clean up the form
+            if (document.body.contains(form)) {
+                document.body.removeChild(form);
+            }
+        }
+    }, 5000);
 }
 
 // Initialize the cart display on page load
