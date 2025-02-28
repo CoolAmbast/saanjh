@@ -579,3 +579,7 @@ footer p {
         padding: 1rem;
     }
 }
+#checkout-button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }

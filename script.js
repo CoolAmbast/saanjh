@@ -10,6 +10,7 @@ function addToCart(item) {
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartDisplay();
     updateCartIcon();
+    updateCheckoutButton();
 }
 
 function removeFromCart(index) {
@@ -17,6 +18,7 @@ function removeFromCart(index) {
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartDisplay();
     updateCartIcon();
+    updateCheckoutButton();
 }
 
 function updateQuantity(index, newQuantity) {
@@ -28,6 +30,7 @@ function updateQuantity(index, newQuantity) {
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartDisplay();
         updateCartIcon();
+        updateCheckoutButton();
     }
 }
 
@@ -78,12 +81,28 @@ function updateCartIcon() {
     }
 }
 
+function updateCheckoutButton() {
+    const checkoutButton = document.getElementById('checkout-button');
+    if (!checkoutButton) return;
+    
+    if (cart.length === 0) {
+        checkoutButton.disabled = true;
+        checkoutButton.classList.add('disabled');
+    } else {
+        checkoutButton.disabled = false;
+        checkoutButton.classList.remove('disabled');
+    }
+}
+
 function toggleCart() {
     const cartContainer = document.getElementById('cart-container');
     cartContainer.classList.toggle('show-cart');
 }
 
 function showCheckoutForm() {
+    // Only proceed if cart is not empty
+    if (cart.length === 0) return;
+    
     // Hide cart first
     document.getElementById('cart-container').classList.remove('show-cart');
     
@@ -160,6 +179,7 @@ function saveOrderToFile(orderData) {
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartDisplay();
         updateCartIcon();
+        updateCheckoutButton();
         
         // Hide checkout form and show thank you message
         hideCheckoutForm();
@@ -186,6 +206,7 @@ function saveOrderToFile(orderData) {
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCartDisplay();
             updateCartIcon();
+            updateCheckoutButton();
             
             // Hide checkout form and show thank you message
             hideCheckoutForm();
@@ -207,6 +228,7 @@ function saveOrderToFile(orderData) {
 document.addEventListener('DOMContentLoaded', function() {
     updateCartDisplay();
     updateCartIcon();
+    updateCheckoutButton();
     
     // Cart toggle events
     document.getElementById('cart-icon').addEventListener('click', toggleCart);
